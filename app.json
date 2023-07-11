@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "web": {
+      "bundler": "metro"
+    },
+    "name": "KTPM_Mobile_App_Client",
+    "slug": "KTPM_Mobile_App_Client"
+  }
+}
