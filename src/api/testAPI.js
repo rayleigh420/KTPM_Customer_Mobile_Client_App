@@ -1,6 +1,8 @@
 import axios from "../utils/axios"
 
 export const test = async () => {
-    const result = await axios.get(`/login`)
+    // setTimeout(async () =>{
+    // }, 3000)
+    const result = await axios.get(`/`)
     return result.data
 }
