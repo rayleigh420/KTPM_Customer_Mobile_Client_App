@@ -13,6 +13,7 @@ export default function App() {
       <Link href="/testAPI" className="mt-[20px]">Test React Query</Link>
       <Link href="/signUp" className="mt-[20px]">SignUp</Link>
       <Link href="/signIn" className="mt-[20px] text-blue-500">SignIn</Link>
+      <Link href="/profile" className="mt-[20px] text-blue-500">Profile</Link>
       <StatusBar style="auto" />
     </View>
   );
