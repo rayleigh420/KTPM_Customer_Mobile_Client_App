@@ -1,23 +1,31 @@
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Entypo, Feather } from '@expo/vector-icons';
+import { Entypo, Feather, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 
 export default function Location() {
 	return (
 		<View className="h-full">
 			<Stack.Screen
 				options={{
-					title: "Current location",
+					title: "",
 					headerTitleStyle: {
 						fontWeight: "450",
 						fontSize: "16px",
-						// headerTitleAlign: "11px"
+					},
+					headerRight: () => {
+						return (
+							<View className="flex flex-row min-w-[330px] pl-[5px] items-center">
+								<View className="min-w-[25px] flex justify-center items-center mr-[3px] mt-[3px]">
+									<FontAwesome name="circle-o" size={20} color="#126FD7" />
+								</View>
+								<Text className="text-[16px] font-normal">Current Location</Text>
+							</View>
+						)
 					},
 					headerShadowVisible: false,
-					headerTitleAlign: "left"
 				}}
 			/>
 			{/* Input */}
@@ -47,7 +55,7 @@ export default function Location() {
 						<View className="flex flex-row mb-[20px]">
 							<View className="flex flex-col justify-start items-center">
 								<View className="w-[25px] p-[3px] mt-[7px] rounded-full bg-[#00B14F] flex justify-center items-center">
-									<Ionicons name="bookmark-sharp" size={16} color="white" />
+									<Ionicons name="bookmark-sharp" size={17} color="white" />
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
@@ -67,7 +75,7 @@ export default function Location() {
 						<View className="flex flex-row mb-[20px]">
 							<View className="flex flex-col justify-start items-center">
 								<View className="w-[25px] p-[3px] rounded-full bg-[#00B14F] flex justify-center items-center">
-									<Entypo name="home" size={17} color="white" />
+									<Entypo name="home" size={18} color="white" />
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
@@ -93,7 +101,7 @@ export default function Location() {
 						<View className="flex flex-row mb-[20px]">
 							<View className="flex flex-col justify-start items-center">
 								<View className="w-[25px] p-[3px] mt-[7px] rounded-full bg-[#00B14F] flex justify-center items-center">
-									<Ionicons name="add" size={17} color="white" />
+									<Ionicons name="add" size={16} color="white" />
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
