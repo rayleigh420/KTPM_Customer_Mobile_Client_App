@@ -41,8 +41,9 @@ export default function Map() {
                         </View>
                     </View>
                 </View>
-                <View className="flex flex-row items-center">
-                    <Text>Add pick-up notes for driver</Text>
+                <View className="flex flex-row items-center justify-start min-w-[350px] pl-[15px] py-[20px] border-[#EFEFEF] border-b-[1.5px] mb-[20px]">
+                    <Entypo name="edit" size={24} color="#01B0E7" />
+                    <Text className="text-[#01B0E7]">Add pick-up notes for driver</Text>
                 </View>
             </View>
         </View>
