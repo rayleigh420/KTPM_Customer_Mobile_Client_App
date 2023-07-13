@@ -8,10 +8,10 @@ export default function Location() {
 		<View className="h-full">
 			<Stack.Screen
 				options={{
-					title: "⭕  Current location",
+					title: "🧿  Current location",
 					headerTitleStyle: {
 						fontWeight: "450",
-						fontSize: "17px",
+						fontSize: "16px",
 						// headerTitleAlign: "11px"
 					},
 					headerShadowVisible: false,
@@ -37,7 +37,7 @@ export default function Location() {
 				</View>
 				<TextInput
 					placeholder="Where to?"
-					className="bg-[#F5F5F5] min-w-[250px] pl-[10px] py-[11px] border-none text-[17px] rounded-r-[7px]"
+					className="bg-[#F5F5F5] min-w-[250px] pl-[10px] py-[11px] border-none text-[16px] rounded-r-[7px]"
 				/>
 				<View className="flex justify-center items-center px-[25px] ">
 					<svg
@@ -60,8 +60,8 @@ export default function Location() {
 
 			<View className='bg-white px-[20px] mt-[11px]'>
 				<View className="flex flex-row justify-between pt-[37px] pb-[20px]">
-					<Text className="text-[17px] font-bold">Saved Places</Text>
-					<Text className="text-[16px] font-bold text-[#166ECF]">View All</Text>
+					<Text className="text-[16px] font-bold">Saved Places</Text>
+					<Text className="text-[15px] font-bold text-[#166ECF]">View All</Text>
 				</View>
 				<ScrollView showsVerticalScrollIndicator={false}>
 					<View className="flex flex-col">
@@ -74,15 +74,14 @@ export default function Location() {
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
 										<path fillRule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clipRule="evenodd" />
 									</svg>
-
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
-								<View className="flex flex-col justify-center">
-									<Text className='text-[17px] font-bold'>Huỳnh Sơn</Text>
-									<Text className='text-[13.5px]'>5.34km . Pick up/Drop off Gate, 227 Nguyễn</Text>
-									<View className="bg-[#D9FCDE] p-[2px] mt-[5px] w-[95px] rounded-[7px] font-[600] flex flex-row justify-center">
-										<Text >Rencent Used</Text>
+								<View className="flex flex-col justify-center w-[262px] max-w-[262px]">
+									<Text className='text-[16px] font-bold'>Huỳnh Sơn</Text>
+									<Text className='text-[13px]'>5.34km . Pick up/Drop off Gate, 227 Nguyễn</Text>
+									<View className="bg-[#D9FCDE] p-[2px] pt-[0.5px] mt-[5px] w-[90px] rounded-[7px] font-[600] flex flex-row justify-center">
+										<Text className="text-[13.5px]">Recent Used</Text>
 									</View>
 								</View>
 								<View className='w-[19px] flex flex-col justify-start items-center pt-[10px] ml-[50px]'>
@@ -101,11 +100,11 @@ export default function Location() {
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
-								<View className="flex flex-col justify-center max-w-[262px]">
-									<Text className='text-[17px] font-bold'>University of Science - Nguyen Van Cu Campus</Text>
-									<Text className='text-[13.5px]'>5.34km . Pick up/Drop off Gate, 227 Nguyễn Văn Cừ</Text>
-									<View className="bg-[#D9FCDE] p-[2.5px] pt-[1px] mt-[5px] w-[95px] rounded-[7px] font-[600] flex flex-row justify-center">
-										<Text >Rencent Used</Text>
+								<View className="flex flex-col justify-center w-[262px] max-w-[262px]">
+									<Text className='text-[16px] font-bold'>University of Science - Nguyen Van Cu Campus</Text>
+									<Text className='text-[13px]'>5.34km . Pick up/Drop off Gate, 227 Nguyễn Văn Cừ</Text>
+									<View className="bg-[#D9FCDE] p-[2px] pt-[0.5px] mt-[5px] w-[90px] rounded-[7px] font-[600] flex flex-row justify-center">
+										<Text className="text-[13.5px]">Recent Used</Text>
 									</View>
 								</View>
 								<View className='w-[19px] flex flex-col justify-start items-center pt-[10px] ml-[50px]'>
@@ -129,8 +128,8 @@ export default function Location() {
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
-								<View className="flex flex-col justify-center">
-									<Text className='text-[17px] font-bold'>Add Home</Text>
+								<View className="flex flex-col justify-center w-[262px] max-w-[262px]">
+									<Text className='text-[16px] font-bold'>Add Home</Text>
 									{/* <Text className='text-[13.5px]'>5.34km . Pick up/Drop off Gate, 227 Nguyễn</Text>
 									<View className="bg-[#D9FCDE] p-[2px] mt-[5px] w-[95px] rounded-[7px] font-[600] flex flex-row justify-center">
 										<Text >Rencent Used</Text>
@@ -154,8 +153,8 @@ export default function Location() {
 								</View>
 							</View>
 							<View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
-								<View className="flex flex-col justify-center">
-									<Text className='text-[17px] font-bold'>Add Work</Text>
+								<View className="flex flex-col justify-center w-[262px] max-w-[262px]">
+									<Text className='text-[16px] font-bold'>Add Work</Text>
 									{/* <Text className='text-[13.5px]'>5.34km . Pick up/Drop off Gate, 227 Nguyễn</Text>
 									<View className="bg-[#D9FCDE] p-[2px] mt-[5px] w-[95px] rounded-[7px] font-[600] flex flex-row justify-center">
 										<Text >Rencent Used</Text>
