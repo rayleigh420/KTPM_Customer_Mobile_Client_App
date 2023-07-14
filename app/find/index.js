@@ -17,7 +17,7 @@ export default function Location() {
 					},
 					headerRight: () => {
 						return (
-							<View className="flex flex-row min-w-[330px] pl-[5px] items-center">
+							<View className="flex flex-row min-w-[330px] pl-[20px] items-center">
 								<View className="min-w-[25px] flex justify-center items-center mr-[3px] mt-[3px]">
 									<FontAwesome name="circle-o" size={20} color="#126FD7" />
 								</View>
@@ -52,7 +52,7 @@ export default function Location() {
 						<Text className="text-[15px] font-bold text-[#166ECF]">View All</Text>
 					</View>
 					<View className="flex flex-col">
-						<Link href="find/map">
+						<Link href="find/map" className="mb-[20px]">
 							<View className="flex flex-row mb-[20px]">
 								<View className="flex flex-col justify-start items-center">
 									<View className="w-[25px] p-[3px] mt-[7px] rounded-full bg-[#00B14F] flex justify-center items-center">
