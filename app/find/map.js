@@ -1,10 +1,12 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, Pressable, TextInput } from 'react-native'
+import React, { useState } from 'react'
 import { Stack } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Entypo, Feather, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 
 export default function Map() {
+    const [addPickUp, setAddPickUp] = useState(false)
+
     return (
         <View className="h-full relative bg-white">
             <Stack.Screen options={{
@@ -41,11 +43,23 @@ export default function Map() {
                         </View>
                     </View>
                 </View>
-                <View className="flex flex-row items-center justify-start min-w-[350px] pl-[15px] py-[20px] border-[#EFEFEF] border-b-[1.5px] mb-[20px]">
-                    <Entypo name="edit" size={24} color="#01B0E7" />
-                    <Text className="text-[#01B0E7] ml-[13px] font-bold">Add pick-up notes for driver</Text>
-                </View>
-                <View className="bg-[#00B14F] min-w-[350px] py-[20px] rounded-[8px] flex justify-center items-center mb-[15px]">
+                {
+                    !addPickUp ?
+                        (
+                            <Pressable onPress={() => setAddPickUp(true)} className="flex flex-row items-center justify-start min-w-[350px] pl-[15px] py-[20px] border-[#EFEFEF] border-b-[1.5px] mb-[20px]">
+                                <Entypo name="edit" size={24} color="#01B0E7" />
+                                <Text className="text-[#01B0E7] ml-[13px] font-bold">Add pick-up notes for driver</Text>
+                            </Pressable>
+                        )
+                        :
+                        (
+                            <View className="flex flex-row min-w-[350px] pl-[15px] py-[10px] mt-[20px] rounded-[8px] border-[#2EAF69] border-[1.5px] mb-[20px]">
+                                <Entypo name="edit" size={24} color="gray" />
+                                <TextInput placeholder='Add pick up notes for driver' className="font-normal ml-[10px] min-w-[300px]" />
+                            </View>
+                        )
+                }
+                <View className="bg-[#00B14F] min-w-[350px] py-[15px] rounded-[8px] flex justify-center items-center mb-[15px]">
                     <Text className="text-white font-bold text-[18px]">Choose this Pick-Up</Text>
                 </View>
             </View>
