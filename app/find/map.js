@@ -53,9 +53,11 @@ export default function Map() {
                         )
                         :
                         (
-                            <View className="flex flex-row min-w-[350px] pl-[15px] py-[10px] mt-[20px] rounded-[8px] border-[#2EAF69] border-[1.5px] mb-[20px]">
-                                <Entypo name="edit" size={24} color="gray" />
-                                <TextInput placeholder='Add pick up notes for driver' className="font-normal ml-[10px] min-w-[300px]" />
+                            <View className="min-w-[350px] border-[#EFEFEF] border-b-[1.5px] mb-[20px]">
+                                <View className="flex flex-row min-w-[350px] pl-[15px] py-[10px] mt-[20px] rounded-[8px] border-[#2EAF69] border-[1.5px] mb-[20px]">
+                                    <Entypo name="edit" size={24} color="gray" />
+                                    <TextInput placeholder='Add pick up notes for driver' className="font-normal ml-[10px] min-w-[300px]" />
+                                </View>
                             </View>
                         )
                 }
