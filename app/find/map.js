@@ -3,30 +3,34 @@ import React, { useState } from 'react'
 import { Stack } from 'expo-router'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Entypo, Feather, FontAwesome5, FontAwesome } from '@expo/vector-icons';
+import ViewMap from '../../src/components/Map/ViewMap';
 
 export default function Map() {
     const [addPickUp, setAddPickUp] = useState(false)
 
     return (
-        <View className="h-full relative bg-white">
+        <View className="h-full relative">
             <Stack.Screen options={{
                 title: "",
                 headerShadowVisible: false,
-                headerStyle: {
-                    backgroundColor: 'transparent',
-                },
+                // headerStyle: {
+                //     // backgroundColor: 'transparent',
+                //     backgroundColor: 'transparent'
+                // },
+                headerTransparent: true,
 
-                headerTransparent: "true",
                 headerLeft: () => {
                     return (
-                        <View className="rounded-full min-w-[25px] min-h-[25px] bg-red-500 flex justify-center items-center ml-[15px]">
+                        <View className="rounded-full min-w-[25px] min-h-[25px] bg-white flex justify-center items-center ml-[5px] shadow-2xl">
                             <Entypo name="chevron-thin-left" size={14} color="black" />
                         </View>
                     )
 
                 }
             }} />
-            <View className="absolute bottom-0 w-full px-[15px] flex flex-col justify-center items-center">
+            {/* <Text className='absolute'>Hello</Text> */}
+            <ViewMap className="" />
+            <View className="absolute bottom-0 w-full px-[15px] flex flex-col justify-center items-center bg-white pt-[20px]">
                 <View className="bg-[#F2F2F2] flex flex-row justify-between items-center px-[17px] py-[15px] min-w-[350px] rounded-[5px]">
                     <View className="flex flex-col justify-start items-center">
                         <View className="w-[25px] p-[3px] mt-[7px] rounded-full flex justify-center items-center">
@@ -56,7 +60,7 @@ export default function Map() {
                             <View className="min-w-[350px] border-[#EFEFEF] border-b-[1.5px] mb-[20px]">
                                 <View className="flex flex-row min-w-[350px] pl-[15px] py-[10px] mt-[20px] rounded-[8px] border-[#2EAF69] border-[1.5px] mb-[20px]">
                                     <Entypo name="edit" size={24} color="gray" />
-                                    <TextInput placeholder='Add pick up notes for driver' className="font-normal ml-[10px] min-w-[300px]" />
+                                    <TextInput placeholder='Add pick-up notes for driver' className="font-normal ml-[10px] min-w-[300px]" />
                                 </View>
                             </View>
                         )
