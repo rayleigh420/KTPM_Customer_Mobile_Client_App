@@ -29,14 +29,12 @@ export default function ViewMap() {
     }
     return (
         <View
-            // style={styles.container}
             className="flex-1"
         >
             {
                 location ?
                     (
                         <MapView
-                            // style={styles.map}
                             className="w-full h-full"
                             initialRegion={{
                                 latitude: location.coords.latitude,
