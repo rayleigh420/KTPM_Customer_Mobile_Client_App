@@ -30,8 +30,8 @@ export default function Location() {
 					headerShadowVisible: false,
 				}}
 			/>
-			{/* Input */}
 
+			{/* Input */}
 			<View className="flex flex-row justify-end bg-white pb-[10px] pt-[3px]">
 				<View className="min-w-[35px] p-[3px] rounded-l-[7px] text-red-500 flex justify-center bg-[#F5F5F5] mr-[-7.5px] pl-[10px]">
 					<Ionicons name="location-sharp" size={22} color="red" />

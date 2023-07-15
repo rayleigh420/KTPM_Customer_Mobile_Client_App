@@ -44,9 +44,11 @@ export default function SavedPlaces() {
                         <View className="flex flex-col justify-center w-[262px] max-w-[262px]">
                             <Text className='text-[16px] font-bold'>Add Home</Text>
                         </View>
-                        {/* <View className='w-[19px] flex flex-col justify-start items-center pt-[10px] ml-[30px]'>
-									<Feather name="edit" size={17} color="black" />
-								</View> */}
+
+                        {/* Create Border bottom */}
+                        <View className='w-[19px] flex flex-col justify-start items-center pt-[10px] ml-[30px]'>
+                            {/* <Feather name="edit" size={17} color="black" /> */}
+                        </View>
                     </View>
                 </View>
 
@@ -59,6 +61,10 @@ export default function SavedPlaces() {
                     <View className="flex flex-row justify-between border-[#EFEFEF] border-b-[1.5px] ml-[10px] pb-[20px]">
                         <View className="flex flex-col justify-center w-[262px] max-w-[262px]">
                             <Text className='text-[16px] font-bold'>Add Work</Text>
+                        </View>
+                        {/* Create Border bottom */}
+                        <View className='w-[19px] flex flex-col justify-start items-center pt-[10px] ml-[30px]'>
+                            {/* <Feather name="edit" size={17} color="black" /> */}
                         </View>
                     </View>
                 </View>
@@ -73,6 +79,10 @@ export default function SavedPlaces() {
                         <View className="flex flex-col justify-center w-[262px] max-w-[262px]">
                             <Text className='text-[16px] font-bold'>Add new</Text>
                             <Text className='text-[13px]'>Save your favourite places</Text>
+                        </View>
+                        {/* Create Border bottom */}
+                        <View className='w-[19px] flex flex-col justify-start items-center pt-[10px] ml-[30px]'>
+                            {/* <Feather name="edit" size={17} color="black" /> */}
                         </View>
                     </View>
                 </View>
