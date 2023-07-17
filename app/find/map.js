@@ -4,6 +4,7 @@ import { Stack } from 'expo-router'
 import { Entypo } from '@expo/vector-icons';
 import ViewMap from '../../src/components/Map/ViewMap';
 import PickUp from '../../src/components/Location/PickUp';
+import Book from '../../src/components/Location/Book';
 
 export default function Map() {
     const [pickBook, setPickBook] = useState(false);
@@ -29,7 +30,7 @@ export default function Map() {
                 !pickBook ?
                     <PickUp setPickBook={setPickBook} />
                     :
-                    <Text>Hello</Text>
+                    <Book />
             }
         </View>
     )
