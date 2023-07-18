@@ -7,7 +7,7 @@ export default function Book() {
         <View className="flex flex-col bg-white py-[20px] rounded-t-[15px]">
             <View className="flex flex-row justify-between items-center min-w-[350px] px-[25px] py-[20px] bg-[#EEFAFA]">
                 <View className="flex flex-row items-center">
-                    <FontAwesome5 name="motorcycle" size={30} color="#00B14F" />
+                    <FontAwesome5 name="motorcycle" size={27} color="#00B14F" />
                     <Text className='ml-[20px] font-bold text-[17px]'>
                         GrabBike
                     </Text>
@@ -18,7 +18,7 @@ export default function Book() {
             </View>
             <View className="flex flex-row justify-between items-center min-w-[350px] px-[25px] py-[20px] ">
                 <View className="flex flex-row items-center">
-                    <FontAwesome name="car" size={30} color="#00B14F" />
+                    <FontAwesome name="car" size={27} color="#00B14F" />
                     <Text className='ml-[20px] font-bold text-[17px]'>
                         GrabCar
                     </Text>
