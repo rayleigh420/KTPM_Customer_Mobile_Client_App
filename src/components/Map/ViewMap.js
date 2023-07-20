@@ -1,4 +1,4 @@
-import { View, Text, PermissionsAndroid, Pressable, StyleSheet } from 'react-native'
+import { View, Text, PermissionsAndroid, Pressable, StyleSheet, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
@@ -53,7 +53,9 @@ export default function ViewMap() {
                         </MapView>
                     )
                     :
-                    <Text>Waiting Map</Text>
+                    <View className='h-full flex justify-center items-center'>
+                        <ActivityIndicator size="large" color="#00B14F" />
+                    </View>
             }
         </View>
     )
