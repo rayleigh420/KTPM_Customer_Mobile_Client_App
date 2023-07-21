@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: 'https://pokeapi.co/api/v2/pokemon/ditto'
-})
+  baseURL: "http://localhost:3500/",
+});
