@@ -5,6 +5,14 @@
       "bundler": "metro"
     },
     "name": "KTPM_Mobile_App_Client",
-    "slug": "KTPM_Mobile_App_Client"
+    "slug": "KTPM_Mobile_App_Client",
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ]
+    ]
   }
 }
