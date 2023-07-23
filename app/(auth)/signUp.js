@@ -4,12 +4,17 @@ import { Button } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, images } from "../../src/constants";
 import { validateEmail } from "../../src/utils/validates";
-import { Stack, router } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import { signUp } from "../../src/api/testAPI";
 import axios from "../../src/utils/axios";
 
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
+
 export default function SignUp() {
+  const navigation = useRouter();
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
 
@@ -18,18 +23,26 @@ export default function SignUp() {
   const signUpMutation = useMutation({
     mutationFn: ({ email, role }) => signUp({ email, role }),
     onSuccess: (data) => {
-      console.log(data)
+      navigation.push("/typePass");
     },
     onError: (err) => {
-      console.log(err)
-    }
+      if (err.response.status == 401) {
+        setErrorEmail("Email already exist");
+        setShowError(true);
+      }
+    },
   });
 
   const handleSubmitEmail = () => {
-    signUpMutation.mutate({
-      email: email,
-      role: "customer"
-    })
+    if (validateEmail(email)) {
+      signUpMutation.mutate({
+        email: email,
+        role: "customer",
+      });
+    } else {
+      setErrorEmail("Invalid email");
+      setShowError(true);
+    }
   };
   return (
     <View
@@ -91,33 +104,6 @@ export default function SignUp() {
             marginHorizontal: 20,
           }}
         >
-          {/* <Button
-            buttonStyle={{
-              height: 50,
-              width: 100,
-              flexDirection: "row",
-              marginLeft: 20,
-              marginRight: 20,
-              paddingLeft: -10,
-              backgroundColor: "white",
-              borderBottomColor: "gray",
-              borderBottomWidth: 1,
-            }}
-            titleStyle={{
-              color: "black",
-              fontWeight: 300,
-            }}
-          >
-            <Image
-              source={images.flagVietNam}
-              resizeMode="contain"
-              style={{
-                height: 20,
-                width: 60,
-              }}
-            />
-            +84
-          </Button> */}
           <TextInput
             placeholder="grab@gmail.com"
             placeholderTextColor={"gray"}
@@ -147,7 +133,7 @@ export default function SignUp() {
         }}
       >
         <Button
-          title={"Next"}
+          title={"Sign Up"}
           buttonStyle={{
             borderRadius: 30,
             height: 55,
