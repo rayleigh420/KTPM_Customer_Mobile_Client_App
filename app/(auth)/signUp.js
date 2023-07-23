@@ -12,31 +12,24 @@ import axios from "../../src/utils/axios";
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
+
   const [showError, setShowError] = useState(false);
-  const { mutate, error, data } = useMutation({
-    mutationFn: (body) => {
-      return signUp(body);
+
+  const signUpMutation = useMutation({
+    mutationFn: ({ email, role }) => signUp({ email, role }),
+    onSuccess: (data) => {
+      console.log(data)
     },
+    onError: (err) => {
+      console.log(err)
+    }
   });
 
-  console.log(111, JSON.stringify(error));
-
-  const handleSubmitEmail = async () => {
-    if (validateEmail(email)) {
-      const dataSubmit = {
-        email: email,
-        role: "customer",
-      };
-      console.log(dataSubmit);
-      mutate(dataSubmit, {
-        onSuccess: () => {
-          console.log("Success", data);
-        },
-      });
-    } else {
-      setErrorEmail("Invalid email");
-      setShowError(true);
-    }
+  const handleSubmitEmail = () => {
+    signUpMutation.mutate({
+      email: email,
+      role: "customer"
+    })
   };
   return (
     <View
