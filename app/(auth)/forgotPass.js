@@ -11,20 +11,21 @@ import { Icon } from "@rneui/themed";
 import { fontSizes, icons } from "../../src/constants";
 import { Stack, useRouter } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
-import { signIn } from "../../src/api/testAPI";
+import { forgotPass } from "../../src/api/testAPI";
 import { validateEmail } from "../../src/utils/validates";
 
 function typePin() {
   const navigation = useRouter();
   const forgotPassMutation = useMutation({
-    mutationFn: ({ email, password }) => signIn({ email, password }),
+    mutationFn: ({ email }) => forgotPass({ email }),
     onSuccess: (data) => {
+      console.log(222, data);
       navigation.push("/signInInput");
     },
     onError: (err) => {
-      //   if (err.response.status == 401) {
-      //     setError("Password incorrect");
-      //   }
+      if (err.response.status == 404) {
+        setError(err.response.data.message);
+      }
     },
   });
 

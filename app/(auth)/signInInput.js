@@ -6,20 +6,22 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import React, { useState } from "react";
-import { Button, fonts } from "@rneui/base";
+import { Button } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, icons } from "../../src/constants";
 import { Stack, useRouter } from "expo-router";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "../../src/api/testAPI";
 import { validateEmail } from "../../src/utils/validates";
+import { storeData } from "../../src/utils/asyncStorage";
 
 function typePin() {
   const navigation = useRouter();
   const signInMutation = useMutation({
     mutationFn: ({ email, password }) => signIn({ email, password }),
     onSuccess: (data) => {
-      navigation.push("/");
+      storeData(data.data, "user");
+      navigation.push("/profile");
     },
     onError: (err) => {
       if (err.response.status == 401) {

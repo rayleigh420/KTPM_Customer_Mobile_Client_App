@@ -22,3 +22,19 @@ export const signIn = async ({ email, password }) => {
   });
   return result.data;
 };
+
+export const forgotPass = async ({ email }) => {
+  const result = await axios.post("/auth/forgotPass", {
+    email,
+  });
+  return result.data;
+};
+
+export const changePass = async ({ email, currentPass, newPass }) => {
+  const result = await axios.post("/auth/forgotPass", {
+    email,
+    currentPass,
+    newPass,
+  });
+  return result.data;
+};
