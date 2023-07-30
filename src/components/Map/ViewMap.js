@@ -2,10 +2,18 @@ import { View, Text, PermissionsAndroid, Pressable, StyleSheet, ActivityIndicato
 import React, { useEffect, useState } from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import MapViewDirections from 'react-native-maps-directions';
+import { useQuery } from '@tanstack/react-query';
+import { getCoordinates } from '../../api/mapAPI';
 
-export default function ViewMap() {
+export default function ViewMap({ targetAddress }) {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+
+    const { data: desCoor, isLoading, isError } = useQuery({
+        queryKey: ["find"],
+        queryFn: () => getCoordinates(targetAddress)
+    })
 
     useEffect(() => {
         (async () => {
@@ -21,12 +29,12 @@ export default function ViewMap() {
         })();
     }, []);
 
-    let text = 'Waiting..';
-    if (errorMsg) {
-        text = errorMsg;
-    } else if (location) {
-        text = JSON.stringify(location);
-    }
+    // let text = 'Waiting..';
+    // if (errorMsg) {
+    //     text = errorMsg;
+    // } else if (location) {
+    //     text = JSON.stringify(location);
+    // }
     return (
         <View
             className="flex-1"
@@ -43,12 +51,26 @@ export default function ViewMap() {
                                 longitudeDelta: 0.0421,
                             }}
                         >
+                            <MapViewDirections
+                                origin={desCoor}
+                                destination={{
+                                    latitude: location.coords.latitude,
+                                    longitude: location.coords.longitude,
+                                }}
+                                apikey={process.env.EXPO_PUBLIC_MAP_APIKEY}
+                                strokeWidth={7}
+                                strokeColor="#00B0FF"
+                            />
                             <Marker
                                 coordinate={{
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,
                                 }}
                                 title="Current Location"
+                            />
+                            <Marker
+                                coordinate={desCoor}
+                                title="Destination Location"
                             />
                         </MapView>
                     )
@@ -60,13 +82,3 @@ export default function ViewMap() {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
-});
