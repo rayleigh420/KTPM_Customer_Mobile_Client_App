@@ -57,7 +57,7 @@ export default function ViewMap({ targetAddress }) {
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,
                                 }}
-                                apikey={process.env.EXPO_PUBLIC_MAP_APIKEY}
+                                apikey="AIzaSyCCHpoIZsIIMd8lt-3gn9JoAfO4WmgJEss"
                                 strokeWidth={7}
                                 strokeColor="#00B0FF"
                             />

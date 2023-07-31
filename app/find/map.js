@@ -1,6 +1,6 @@
 import { View, Text, Pressable, TextInput } from 'react-native'
 import React, { useState } from 'react'
-import { Stack } from 'expo-router'
+import { Stack, usePathname } from 'expo-router'
 import { Entypo } from '@expo/vector-icons';
 import ViewMap from '../../src/components/Map/ViewMap';
 import PickUp from '../../src/components/Location/PickUp';
@@ -8,6 +8,8 @@ import Book from '../../src/components/Location/Book';
 
 export default function Map() {
     const [pickBook, setPickBook] = useState(false);
+
+    const pathname = usePathname()
 
     return (
         <View className="h-full relative">
@@ -26,6 +28,7 @@ export default function Map() {
                 }
             }} />
             <ViewMap className="" />
+            <Text>{pathname}</Text>
             {
                 !pickBook ?
                     <PickUp setPickBook={setPickBook} />

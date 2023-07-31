@@ -1,5 +1,5 @@
 import { View, Text, Button } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Link, Stack } from "expo-router";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,6 +8,12 @@ import SavedPlaces from "../../src/components/Places/SavedPlaces";
 import FrequentlyPlaces from "../../src/components/Places/FrequentlyPlaces";
 
 export default function Location() {
+	const [place, setPlace] = useState();
+
+	const changePlace = (e) => {
+		setPlace(e)
+	}
+
 	return (
 		<View className="h-full">
 			<Stack.Screen
@@ -37,7 +43,9 @@ export default function Location() {
 					<Ionicons name="location-sharp" size={22} color="red" />
 				</View>
 				<TextInput
+					onChangeText={(e) => changePlace(e)}
 					placeholder="Where to?"
+					value={place}
 					className="bg-[#F5F5F5] min-w-[230px] pl-[10px] py-[11px] border-none text-[16px] rounded-r-[7px]"
 				/>
 				<View className="flex justify-center items-center px-[25px] ">

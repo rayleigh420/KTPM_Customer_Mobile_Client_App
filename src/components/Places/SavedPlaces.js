@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { Entypo, Feather, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
-export default function SavedPlaces() {
+export default function SavedPlaces({ place }) {
     return (
         <View className='bg-white px-[20px] mt-[11px]'>
             <View className="flex flex-row justify-between pt-[37px] pb-[20px]">
@@ -12,7 +12,7 @@ export default function SavedPlaces() {
                 <Text className="text-[15px] font-bold text-[#166ECF]">View All</Text>
             </View>
             <View className="flex flex-col">
-                <Link href="find/map" className="mb-[20px]">
+                <Link href={`find/map?place=${place}`} className="mb-[20px]">
                     <View className="flex flex-row mb-[20px]">
                         <View className="flex flex-col justify-start items-center">
                             <View className="w-[25px] p-[3px] mt-[7px] rounded-full bg-[#00B14F] flex justify-center items-center">
