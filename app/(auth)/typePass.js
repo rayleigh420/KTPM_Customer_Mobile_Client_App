@@ -5,12 +5,31 @@ import {
   TextInput,
   KeyboardAvoidingView,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button, fonts } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, icons } from "../../src/constants";
+import { Stack, useRouter } from "expo-router";
 
 function getCode() {
+  const navigation = useRouter();
+  const codeValue = "12345678";
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const handleChangePassword = (text) => {
+    setPassword(text);
+    setError("");
+  };
+  useEffect(() => {
+    if (password.length === 8) {
+      if (password === codeValue) {
+        navigation.push("/");
+      } else {
+        setError("Incorrect password");
+        setPassword("");
+      }
+    }
+  }, [password]);
   return (
     <View
       style={{
@@ -18,28 +37,15 @@ function getCode() {
         backgroundColor: "white",
       }}
     >
-      <View
-        style={{
-          height: 56,
-          flexDirection: "row",
-          justifyContent: "space-between",
+      <Stack.Screen
+        options={{
+          title: "",
+          headerStyle: {
+            height: 56,
+          },
+          headerShadowVisible: false,
         }}
-      >
-        <Button
-          buttonStyle={{
-            alignSelf: "center",
-            backgroundColor: "white",
-            alignItems: "center",
-            paddingHorizontal: 20,
-            borderColor: "transparent",
-            borderWidth: 0,
-            width: 70,
-            paddingLeft: -10,
-          }}
-        >
-          <Icon name="chevron-left" size={40} color={"gray"} />
-        </Button>
-      </View>
+      />
       <View
         style={{
           height: 100,
@@ -53,7 +59,7 @@ function getCode() {
             fontSize: fontSizes.h4,
           }}
         >
-          Enter the 6-digit code sent to
+          Enter the password sent to
         </Text>
         <Text
           style={{
@@ -61,19 +67,19 @@ function getCode() {
             fontWeight: "600",
           }}
         >
-          +84 0773255264
+          son@gmail.com
         </Text>
       </View>
       <View
         style={{
           flex: 75,
-          justifyContent: "space-evenly",
+          // justifyContent: "space-evenly",
         }}
       >
         <TextInput
-          keyboardType="number-pad"
-          placeholder="000000"
+          placeholder="abcXyZ12"
           placeholderTextColor={"rgba(0,0,0,0.2)"}
+          maxLength={8}
           style={{
             fontSize: fontSizes.h1Large,
             flex: 1,
@@ -83,12 +89,26 @@ function getCode() {
             left: 0,
             marginLeft: 20,
           }}
-          // value={email}
-          onChangeText={(text) => {
-            // setEmail(text);
-            // setErrorEmail("");
-          }}
+          value={password}
+          onChangeText={handleChangePassword}
         />
+        {error ? (
+          <Text
+            style={{
+              fontSize: fontSizes.h4,
+              color: "red",
+              fontWeight: 300,
+              marginLeft: 20,
+              position: "absolute",
+              top: 50,
+              left: 0,
+            }}
+          >
+            {error}
+          </Text>
+        ) : (
+          <></>
+        )}
       </View>
       <View
         style={{
@@ -103,9 +123,9 @@ function getCode() {
             fontSize: fontSizes.h4,
           }}
         >
-          Didn't get a code?
+          Already have an account?
         </Text>
-        {/* <Button
+        <Button
           buttonStyle={{
             backgroundColor: "white",
             alignSelf: "flex-start",
@@ -116,19 +136,12 @@ function getCode() {
             color: "#14BF61",
             textDecorationLine: "underline",
           }}
-        >
-          Request new code
-        </Button> */}
-        <Text
-          style={{
-            fontSize: fontSizes.h4,
-            marginTop: 10,
-            fontWeight: 700,
-            color: "rgba(0,0,0,0.2)",
+          onPress={() => {
+            navigation.push("/signIn");
           }}
         >
-          Request a new code in 00:27
-        </Text>
+          Sign In
+        </Button>
       </View>
     </View>
   );

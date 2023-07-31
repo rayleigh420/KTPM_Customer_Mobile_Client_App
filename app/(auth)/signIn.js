@@ -3,8 +3,12 @@ import React from "react";
 import { Button } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, icons } from "../../src/constants";
+import { Stack, useRouter } from "expo-router";
+import { EXPO_PUBLIC_API_KEY } from "@env";
 
 export default function SignIn() {
+  const navigation = useRouter();
+  // console.log(EXPO_PUBLIC_API_KEY);
   return (
     <View
       style={{
@@ -12,6 +16,16 @@ export default function SignIn() {
         backgroundColor: "#14BF61",
       }}
     >
+      <Stack.Screen
+        options={{
+          title: "",
+          headerStyle: {
+            height: 56,
+            backgroundColor: "#14BF61",
+          },
+          headerShadowVisible: false,
+        }}
+      />
       <View
         style={{
           flex: 60,
@@ -164,6 +178,9 @@ export default function SignIn() {
             alignSelf: "center",
             textAlign: "center",
           }}
+          onPress={() => {
+            navigation.push("/signInInput");
+          }}
         >
           <Icon
             name="phone"
@@ -172,7 +189,7 @@ export default function SignIn() {
               paddingRight: 20,
             }}
           />
-          Continue With Mobile Number
+          Continue With Grab Account
         </Button>
       </View>
     </View>

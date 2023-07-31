@@ -1,10 +1,50 @@
 import { View, Text, TextInput, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, images } from "../../src/constants";
+import { validateEmail } from "../../src/utils/validates";
+import { Stack, useRouter } from "expo-router";
+import { useMutation } from "@tanstack/react-query";
+import { signUp } from "../../src/api/testAPI";
+import axios from "../../src/utils/axios";
+
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 export default function SignUp() {
+  const navigation = useRouter();
+  const [email, setEmail] = useState("");
+  const [errorEmail, setErrorEmail] = useState("");
+
+  const [showError, setShowError] = useState(false);
+
+  const signUpMutation = useMutation({
+    mutationFn: ({ email, role }) => signUp({ email, role }),
+    onSuccess: (data) => {
+      navigation.push("/typePass");
+      console.log(data);
+    },
+    onError: (err) => {
+      if (err.response.status == 401) {
+        setErrorEmail("Email already exist");
+        setShowError(true);
+      }
+    },
+  });
+
+  const handleSubmitEmail = () => {
+    if (validateEmail(email)) {
+      signUpMutation.mutate({
+        email: email,
+        role: "customer",
+      });
+    } else {
+      setErrorEmail("Invalid email");
+      setShowError(true);
+    }
+  };
   return (
     <View
       style={{
@@ -12,42 +52,38 @@ export default function SignUp() {
         flex: 1,
       }}
     >
-      <View
-        style={{
-          height: 56,
-          flexDirection: "row",
-          justifyContent: "space-between",
+      <Stack.Screen
+        options={{
+          title: "",
+          headerStyle: {
+            height: 56,
+          },
+          headerShadowVisible: false,
+          headerRight: () => {
+            return (
+              <View
+                style={{
+                  // height: 56,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  minWidth: 295,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: fontSizes.h3,
+                    fontWeight: 700,
+                    marginRight: 20,
+                  }}
+                >
+                  Get Started
+                </Text>
+              </View>
+            );
+          },
         }}
-      >
-        <Button
-          buttonStyle={{
-            alignSelf: "center",
-            backgroundColor: "white",
-            alignItems: "center",
-            paddingHorizontal: 20,
-            borderColor: "transparent",
-            borderWidth: 0,
-            width: 70,
-            paddingLeft: -10,
-          }}
-        >
-          <Icon name="chevron-left" size={40} color={"gray"} />
-        </Button>
-        <Text
-          style={{
-            alignSelf: "center",
-            fontSize: fontSizes.h3,
-            fontWeight: 700,
-          }}
-        >
-          Get Started
-        </Text>
-        <View
-          style={{
-            width: 70,
-          }}
-        />
-      </View>
+      />
       <View
         style={{
           height: 100,
@@ -60,58 +96,32 @@ export default function SignUp() {
             marginLeft: 20,
           }}
         >
-          Mobile
+          Email
         </Text>
         <View
           style={{
-            flexDirection: "row",
+            // flexDirection: "row",
             marginTop: 20,
+            marginHorizontal: 20,
           }}
         >
-          <Button
-            buttonStyle={{
-              height: 50,
-              width: 100,
-              flexDirection: "row",
-              marginLeft: 20,
-              marginRight: 20,
-              paddingLeft: -10,
-              backgroundColor: "white",
-              borderBottomColor: "gray",
-              borderBottomWidth: 1,
-            }}
-            titleStyle={{
-              color: "black",
-              fontWeight: 300,
-            }}
-          >
-            <Image
-              source={images.flagVietNam}
-              resizeMode="contain"
-              style={{
-                height: 20,
-                width: 60,
-              }}
-            />
-            +84
-          </Button>
           <TextInput
-            keyboardType="number-pad"
-            placeholder="99 123 4567"
+            placeholder="grab@gmail.com"
             placeholderTextColor={"gray"}
             style={{
               fontSize: fontSizes.h3,
               borderBottomWidth: 1,
-              borderBottomColor: "gray",
-              flex: 1,
-              marginRight: 20,
+              borderBottomColor: showError ? "red" : "gray",
             }}
-            // value={email}
+            value={email}
             onChangeText={(text) => {
-              // setEmail(text);
-              // setErrorEmail("");
+              setEmail(text);
+              setShowError(false);
             }}
           />
+          {showError && (
+            <Text style={{ marginTop: 10, color: "red" }}>{errorEmail}</Text>
+          )}
         </View>
       </View>
       <View
@@ -124,7 +134,7 @@ export default function SignUp() {
         }}
       >
         <Button
-          title={"Next"}
+          title={"Sign Up"}
           buttonStyle={{
             borderRadius: 30,
             height: 55,
@@ -134,6 +144,7 @@ export default function SignUp() {
           titleStyle={{
             fontSize: fontSizes.h2,
           }}
+          onPress={handleSubmitEmail}
         />
       </View>
     </View>
