@@ -4,9 +4,11 @@ import { Button } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, icons } from "../../src/constants";
 import { Stack, useRouter } from "expo-router";
+import { EXPO_PUBLIC_API_KEY } from "@env";
 
 export default function SignIn() {
   const navigation = useRouter();
+  // console.log(EXPO_PUBLIC_API_KEY);
   return (
     <View
       style={{
