@@ -5,6 +5,7 @@ import { Entypo, Feather, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 
 export default function SavedPlaces({ place }) {
+    console.log(place)
     return (
         <View className='bg-white px-[20px] mt-[11px]'>
             <View className="flex flex-row justify-between pt-[37px] pb-[20px]">

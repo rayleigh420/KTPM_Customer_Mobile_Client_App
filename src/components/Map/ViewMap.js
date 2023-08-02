@@ -10,6 +10,8 @@ export default function ViewMap({ targetAddress }) {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
+    console.log(targetAddress)
+
     const { data: desCoor, isLoading, isError } = useQuery({
         queryKey: ["find"],
         queryFn: () => getCoordinates(targetAddress)
@@ -57,7 +59,7 @@ export default function ViewMap({ targetAddress }) {
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,
                                 }}
-                                apikey="AIzaSyCCHpoIZsIIMd8lt-3gn9JoAfO4WmgJEss"
+                                apikey="AIzaSyBryumluA-fNb7a9-zRojVZv-m3fdm-gtY"
                                 strokeWidth={7}
                                 strokeColor="#00B0FF"
                             />
@@ -79,6 +81,7 @@ export default function ViewMap({ targetAddress }) {
                         <ActivityIndicator size="large" color="#00B14F" />
                     </View>
             }
+            <Text className="mt-[100px]">{JSON.stringify(targetAddress)}</Text>
         </View>
     )
 }

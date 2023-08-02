@@ -46,7 +46,7 @@ export default function Location() {
 					onChangeText={(e) => changePlace(e)}
 					placeholder="Where to?"
 					value={place}
-					className="bg-[#F5F5F5] min-w-[230px] pl-[10px] py-[11px] border-none text-[16px] rounded-r-[7px]"
+					className="bg-[#F5F5F5] min-w-[230px] max-w-[230px] pr-[10px] pl-[10px] py-[11px] border-none text-[16px] rounded-r-[7px]"
 				/>
 				<View className="flex justify-center items-center px-[25px] ">
 					<Ionicons name="add-circle-outline" size={24} color="black" />
@@ -56,7 +56,7 @@ export default function Location() {
 
 			<ScrollView showsVerticalScrollIndicator={false}>
 				{/* Saved Placed */}
-				<SavedPlaces />
+				<SavedPlaces place={place} />
 
 				{/* Frequently used */}
 				<FrequentlyPlaces />
