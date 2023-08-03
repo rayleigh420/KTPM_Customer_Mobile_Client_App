@@ -4,7 +4,6 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 export default function App() {
-  console.log("Hello")
   return (
     <View className="flex-1 items-center justify-center bg-white">
       <Text className="text-red-400">Router</Text>
@@ -14,6 +13,8 @@ export default function App() {
       <Link href="/signUp" className="mt-[20px]">SignUp</Link>
       <Link href="/signIn" className="mt-[20px] text-blue-500">SignIn</Link>
       <Link href="/profile" className="mt-[20px] text-blue-500">Profile</Link>
+      <Link href="/history" className= "mt-[20px] text-blue-500">History</Link>
+      <Link href="/detailHistory" className= "mt-[20px] text-blue-500">Detail History</Link>
       <StatusBar style="auto" />
     </View>
   );
