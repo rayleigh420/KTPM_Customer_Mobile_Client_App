@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import HeaderProfile from '../../src/components/profile/HeaderProfile';
@@ -6,10 +6,23 @@ import { TextInput } from 'react-native-gesture-handler';
 import InforProfile from '../../src/components/profile/InforProfile';
 import { StatusBar } from 'expo-status-bar';
 import { Stack } from 'expo-router';
+import { getData } from "../../src/utils/asyncStorage";
+
 
 export default function Profile() {
   const [isEnabled, setIsEnabled] = useState(true);
+  
+  const [dataUser, setDataUser] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getData("user");
+      setDataUser(data);
+    };
+    fetchData();
+  }, []);
 
+
+  
   const toogleSwith = () => {
     setIsEnabled(previousState => !previousState);
   }
@@ -232,7 +245,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 500,
     opacity: 0.6,
-    marginLeft: 10,
+    marginLeft: 15,
     marginBottom: 7,
   },
   cardProfiles: {
@@ -275,3 +288,5 @@ const styles = StyleSheet.create({
 
 
 }); 
+
+
