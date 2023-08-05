@@ -2,22 +2,36 @@ import { View, Text, PermissionsAndroid, Pressable, StyleSheet, ActivityIndicato
 import React, { useEffect, useState } from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
+import { useNavigation, useRouter } from 'expo-router';
 
 export default function ViewMap() {
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
 
+    // const router = useRouter()
+    const navigation = useNavigation();
+    const router = useRouter();
+
     useEffect(() => {
         (async () => {
+            try {
 
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
+                let { status } = await Location.requestForegroundPermissionsAsync();
+                console.log(status)
+                if (status !== 'granted') {
+                    setErrorMsg('Permission to access location was denied');
+                    navigation.goBack();
+                    console.log("Fail")
+                    // router.back();
+                    return;
+                }
+
+                let location = await Location.getCurrentPositionAsync({});
+                setLocation(location);
+            } catch (error) {
+                console.log(error)
+                navigation.goBack();
             }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
         })();
     }, []);
 
