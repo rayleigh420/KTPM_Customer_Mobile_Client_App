@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import MapViewDirections from 'react-native-maps-directions';
 import { useQuery } from '@tanstack/react-query';
 import { getCoordinates } from '../../api/mapAPI';
+import { useNavigation, useRouter } from 'expo-router';
 
 export default function ViewMap({ targetAddress }) {
     const [location, setLocation] = useState(null);
@@ -16,18 +17,30 @@ export default function ViewMap({ targetAddress }) {
         queryKey: ["find"],
         queryFn: () => getCoordinates(targetAddress)
     })
+    // const router = useRouter()
+    const navigation = useNavigation();
+    const router = useRouter();
 
     useEffect(() => {
         (async () => {
+            try {
 
-            let { status } = await Location.requestForegroundPermissionsAsync();
-            if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
+                let { status } = await Location.requestForegroundPermissionsAsync();
+                console.log(status)
+                if (status !== 'granted') {
+                    setErrorMsg('Permission to access location was denied');
+                    navigation.goBack();
+                    console.log("Fail")
+                    // router.back();
+                    return;
+                }
+
+                let location = await Location.getCurrentPositionAsync({});
+                setLocation(location);
+            } catch (error) {
+                console.log(error)
+                navigation.goBack();
             }
-
-            let location = await Location.getCurrentPositionAsync({});
-            setLocation(location);
         })();
     }, []);
 

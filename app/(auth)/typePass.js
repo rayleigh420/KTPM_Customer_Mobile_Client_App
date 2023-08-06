@@ -10,26 +10,49 @@ import { Button, fonts } from "@rneui/base";
 import { Icon } from "@rneui/themed";
 import { fontSizes, icons } from "../../src/constants";
 import { Stack, useRouter } from "expo-router";
+import { getData, storeData } from "../../src/utils/asyncStorage";
+import { useMutation } from "@tanstack/react-query";
+import { signIn } from "../../src/api/testAPI";
 
 function getCode() {
   const navigation = useRouter();
   const codeValue = "12345678";
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const signInMutation = useMutation({
+    mutationFn: ({ email, password }) => signIn({ email, password }),
+    onSuccess: (data) => {
+      storeData(data.data, "user");
+      navigation.push("/");
+    },
+    onError: (err) => {
+      setError("Incorrect password");
+      setPassword("");
+    },
+  });
+
   const handleChangePassword = (text) => {
     setPassword(text);
     setError("");
   };
   useEffect(() => {
     if (password.length === 8) {
-      if (password === codeValue) {
-        navigation.push("/");
-      } else {
-        setError("Incorrect password");
-        setPassword("");
-      }
+      signInMutation.mutate({
+        email: email,
+        password: password,
+      });
     }
   }, [password]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getData("emailSignUp");
+      console.log(data);
+      setEmail(data);
+    };
+    fetchData();
+  }, [email]);
   return (
     <View
       style={{
@@ -67,7 +90,7 @@ function getCode() {
             fontWeight: "600",
           }}
         >
-          son@gmail.com
+          {email}
         </Text>
       </View>
       <View
@@ -113,7 +136,6 @@ function getCode() {
       <View
         style={{
           height: 75,
-          //   backgroundColor: "blue",
           marginLeft: 20,
           marginTop: 10,
         }}

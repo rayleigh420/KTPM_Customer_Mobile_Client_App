@@ -37,6 +37,8 @@ export default function App() {
       <Link href="/forgotPass" className="mt-[20px]">
         forgot password
       </Link>
+      <Link href="/history" className= "mt-[20px] text-blue-500">History</Link>
+      <Link href="/detailHistory" className= "mt-[20px] text-blue-500">Detail History</Link>
       <StatusBar style="auto" />
     </View>
   );

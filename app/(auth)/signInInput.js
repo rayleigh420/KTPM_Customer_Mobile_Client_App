@@ -44,6 +44,7 @@ function typePin() {
       setError("Please input valid email");
     }
   };
+
   return (
     <View
       style={{

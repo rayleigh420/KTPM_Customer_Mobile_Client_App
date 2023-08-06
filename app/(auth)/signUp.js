@@ -10,6 +10,7 @@ import { signUp } from "../../src/api/testAPI";
 import axios from "../../src/utils/axios";
 
 import { LogBox } from "react-native";
+import { storeData } from "../../src/utils/asyncStorage";
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs(); //Ignore all log notifications
 
@@ -24,17 +25,18 @@ export default function SignUp() {
     mutationFn: ({ email, role }) => signUp({ email, role }),
     onSuccess: (data) => {
       navigation.push("/typePass");
+      storeData(email, "emailSignUp");
       console.log(data);
     },
     onError: (err) => {
-      if (err.response.status == 401) {
+      if (err.response.status == 400) {
         setErrorEmail("Email already exist");
         setShowError(true);
       }
     },
   });
 
-  const handleSubmitEmail = () => {
+  const handleSubmitEmail = async () => {
     if (validateEmail(email)) {
       signUpMutation.mutate({
         email: email,
