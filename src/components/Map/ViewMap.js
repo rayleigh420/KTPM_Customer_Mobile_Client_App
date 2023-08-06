@@ -6,6 +6,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import { useQuery } from '@tanstack/react-query';
 import { getCoordinates } from '../../api/mapAPI';
 import { useNavigation, useRouter } from 'expo-router';
+import { EXPO_PUBLIC_MAP_APIKEY } from "@env";
 
 export default function ViewMap({ targetAddress }) {
     const [location, setLocation] = useState(null);
@@ -72,7 +73,7 @@ export default function ViewMap({ targetAddress }) {
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,
                                 }}
-                                apikey="AIzaSyCtogOBqVFXxTK6rcqW-RPuNFH1OkcUEUI"
+                                apikey={EXPO_PUBLIC_MAP_APIKEY}
                                 strokeWidth={7}
                                 strokeColor="#00B0FF"
                             />
