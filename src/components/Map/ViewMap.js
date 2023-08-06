@@ -59,7 +59,7 @@ export default function ViewMap({ targetAddress }) {
                                     latitude: location.coords.latitude,
                                     longitude: location.coords.longitude,
                                 }}
-                                apikey="AIzaSyBryumluA-fNb7a9-zRojVZv-m3fdm-gtY"
+                                apikey="AIzaSyCtogOBqVFXxTK6rcqW-RPuNFH1OkcUEUI"
                                 strokeWidth={7}
                                 strokeColor="#00B0FF"
                             />
