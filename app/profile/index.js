@@ -5,13 +5,33 @@ import HeaderProfile from '../../src/components/profile/HeaderProfile';
 import { TextInput } from 'react-native-gesture-handler';
 import InforProfile from '../../src/components/profile/InforProfile';
 import { StatusBar } from 'expo-status-bar';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from "expo-router";
 import { getData } from "../../src/utils/asyncStorage";
+import { changePass } from '../../src/api/testAPI';
+import { useMutation } from "@tanstack/react-query";
+
 
 
 export default function Profile() {
   const [isEnabled, setIsEnabled] = useState(true);
-  
+  const [infoUser, setInfoUser] = useState({}); 
+  const [email, setEmail] = useState("");
+  const [curPass, setCurPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+
+  const navigation = useRouter();
+  const signInMutation = useMutation({
+    mutationFn: ({ email, curPass, newPass }) => changePass({ email, curPass, newPass }),
+    onSuccess: (data) => {
+      navigation.push("/profile");
+    },
+    onError: (err) => {
+      if (err.response.status == 400) {
+        setError("Password incorrect");
+      }
+    },
+  });
+
   const [dataUser, setDataUser] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -21,163 +41,176 @@ export default function Profile() {
     fetchData();
   }, []);
 
-
-  
   const toogleSwith = () => {
     setIsEnabled(previousState => !previousState);
   }
-  return (
-    <View>
-      <Stack.Screen 
-        options={{
-          headerTransparent: true, 
-          title: ''
-        }}
-      />
-      <ScrollView style={styles.container}>
-        <HeaderProfile />
 
-        <TouchableOpacity style={styles.inforSummary}>
-          <Text style={styles.textSummary}>
-            24 Point | Sliver Member
-          </Text>
-
-          <Icon name="angle-right" size={19} color="black" style={styles.iconSummary} />
-        </TouchableOpacity>
-
-        <View style={styles.checkInfor}>
-          <Icon name='check-circle' size={23} color="#35ccf2" />
-          <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: 300, color: 'black', opacity: 0.7 }}>GrabLorPIN Enabled</Text>
-        </View>
-
-        <InforProfile />
-
-        <Text style={styles.introVerified}>
-          Account-related information and product communications from Grab-Lor will be sent to this verified email address.
+  if (dataUser == null) {
+    return (
+      <View>
+        <Text>
+          NULL
         </Text>
+      </View>
+    )
+  }
+  else {
+    return (
+      <View>
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            title: ''
+          }}
+        />
+        <ScrollView style={styles.container}>
+          <HeaderProfile />
 
-        <View style={styles.profiles}>
-          <Text style={styles.titleProfiles}>
-            Profiles
-          </Text>
-          <TouchableOpacity style={styles.cardProfiles}>
-            <Text style={{ color: '#36b8d8', fontSize: 16, fontWeight: 500, }}>
-              Add a business profile
+          <TouchableOpacity style={styles.inforSummary}>
+            <Text style={styles.textSummary}>
+              24 Point | Sliver Member
             </Text>
-            <Text style={{ fontWeight: 300, color: '#a5a4a4' }}>
-              Better manage your ride expenses
-            </Text>
+
+            <Icon name="angle-right" size={19} color="black" style={styles.iconSummary} />
           </TouchableOpacity>
-        </View>
 
-
-        <View styles={styles.linkAccounts}>
-          <Text style={styles.titleLinkAccounts}>
-            Linked Accounts
-          </Text>
-
-          <View style={styles.containerAccounts}>
-            <TouchableOpacity style={styles.cardLinkAccounts}>
-              <View style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-                <Icon name='facebook' size={30} color={'#3b5998'} />
-                <Text style={{ fontSize: 16, fontWeight: 400, marginLeft: 23, opacity: 0.9 }}>
-                  Facebook
-                </Text>
-              </View>
-
-              <Switch
-                trackColor={{ false: '#c1b8b8', true: 'green' }}
-                thumbColor={isEnabled ? '#f4f3f4' : 'f4f3f4'}
-                onValueChange={toogleSwith}
-                value={isEnabled}
-                style={
-                  {
-                    marginRight: 10,
-                  }
-                }
-              />
-              <StatusBar style='auto' />
-
-
-
-            </TouchableOpacity>
-
-            <View style={styles.hrLine}>
-            </View>
-
-            <TouchableOpacity style={styles.cardLinkAccounts}>
-              <View style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-              }}>
-                <Icon name='google' size={30} color={'#eaea7e'} />
-                <Text style={{ fontSize: 16, fontWeight: 400, marginLeft: 15, opacity: 0.9 }}>
-                  Google
-                </Text>
-              </View>
-
-              <Switch
-                trackColor={{ false: '#c1b8b8', true: 'green' }}
-                thumbColor={isEnabled ? '#f4f3f4' : 'f4f3f4'}
-                onValueChange={toogleSwith}
-                value={isEnabled}
-                style={
-                  {
-                    marginRight: 10,
-                  }
-                }
-              />
-              <StatusBar style='auto' />
-
-
-
-            </TouchableOpacity>
-
+          <View style={styles.checkInfor}>
+            <Icon name='check-circle' size={23} color="#35ccf2" />
+            <Text style={{ marginLeft: 10, fontSize: 14, fontWeight: 300, color: 'black', opacity: 0.7 }}>GrabLorPIN Enabled</Text>
           </View>
 
-          <View style={
-            {
-              height: 110,
-              display: 'flex',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-            }
-          }>
-            <TouchableOpacity style={{
-              marginTop: 20,
-              marginBottom: 30
+          {/* show information and can update name or password */}
+          <InforProfile name={dataUser.userName} email={dataUser.email} />
 
-            }}>
-              <Text style={
-                {
-                  fontSize: 20,
-                  fontWeight: 700,
-                  color: '#6b6767'
-                }
-              }>
-                Log Out
+          <Text style={styles.introVerified}>
+            Account-related information and product communications from Grab-Lor will be sent to this verified email address.
+          </Text>
+
+          <View style={styles.profiles}>
+            <Text style={styles.titleProfiles}>
+              Profiles
+            </Text>
+            <TouchableOpacity style={styles.cardProfiles}>
+              <Text style={{ color: '#36b8d8', fontSize: 16, fontWeight: 500, }}>
+                Add a business profile
+              </Text>
+              <Text style={{ fontWeight: 300, color: '#a5a4a4' }}>
+                Better manage your ride expenses
               </Text>
             </TouchableOpacity>
-
-            <Text style={{
-              opacity: 0.7
-            }}>
-              v1.0001(5260000) Build; Build 234123
-            </Text>
           </View>
 
-        </View>
+
+          <View styles={styles.linkAccounts}>
+            <Text style={styles.titleLinkAccounts}>
+              Linked Accounts
+            </Text>
+
+            <View style={styles.containerAccounts}>
+              <TouchableOpacity style={styles.cardLinkAccounts}>
+                <View style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                  <Icon name='facebook' size={30} color={'#3b5998'} />
+                  <Text style={{ fontSize: 16, fontWeight: 400, marginLeft: 23, opacity: 0.9 }}>
+                    Facebook
+                  </Text>
+                </View>
+
+                <Switch
+                  trackColor={{ false: '#c1b8b8', true: 'green' }}
+                  thumbColor={isEnabled ? '#f4f3f4' : 'f4f3f4'}
+                  onValueChange={toogleSwith}
+                  value={isEnabled}
+                  style={
+                    {
+                      marginRight: 10,
+                    }
+                  }
+                />
+                <StatusBar style='auto' />
 
 
-      </ScrollView>
-    </View>
 
-  )
+              </TouchableOpacity>
+
+              <View style={styles.hrLine}>
+              </View>
+
+              <TouchableOpacity style={styles.cardLinkAccounts}>
+                <View style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                  <Icon name='google' size={30} color={'#eaea7e'} />
+                  <Text style={{ fontSize: 16, fontWeight: 400, marginLeft: 15, opacity: 0.9 }}>
+                    Google
+                  </Text>
+                </View>
+
+                <Switch
+                  trackColor={{ false: '#c1b8b8', true: 'green' }}
+                  thumbColor={isEnabled ? '#f4f3f4' : 'f4f3f4'}
+                  onValueChange={toogleSwith}
+                  value={isEnabled}
+                  style={
+                    {
+                      marginRight: 10,
+                    }
+                  }
+                />
+                <StatusBar style='auto' />
+
+
+
+              </TouchableOpacity>
+
+            </View>
+
+            <View style={
+              {
+                height: 110,
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
+              }
+            }>
+              <TouchableOpacity style={{
+                marginTop: 20,
+                marginBottom: 30
+
+              }}>
+                <Text style={
+                  {
+                    fontSize: 20,
+                    fontWeight: 700,
+                    color: '#6b6767'
+                  }
+                }>
+                  Log Out
+                </Text>
+              </TouchableOpacity>
+
+              <Text style={{
+                opacity: 0.7
+              }}>
+                v1.0001(5260000) Build; Build 234123
+              </Text>
+            </View>
+
+          </View>
+
+
+        </ScrollView>
+      </View>
+
+    )
+  }
+
+
 }
 
 const styles = StyleSheet.create({
@@ -287,6 +320,6 @@ const styles = StyleSheet.create({
   },
 
 
-}); 
+});
 
 

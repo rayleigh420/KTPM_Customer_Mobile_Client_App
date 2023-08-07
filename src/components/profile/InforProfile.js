@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function InforProfile() {
+export default function InforProfile(props) {
     return (
         <View style= {styles.container}>
             {/* Infor Name  */}
@@ -12,7 +12,7 @@ export default function InforProfile() {
                 </Text>
                 <TextInput
                     style={styles.inputInfor}
-                    placeholder='Sơn Huỳnh'
+                    placeholder= {props.name}
                     placeholderTextColor="#333333" // change color
                 />
             </View>
@@ -20,13 +20,13 @@ export default function InforProfile() {
             {/* Infor PhoneNumber  */}
             <View>
                 <Text style= {styles.titleInput}>
-                    Mobile Number
+                    Password
                 </Text>
-                <TextInput
+                <TextInput 
+                     secureTextEntry={true}
                     style={styles.inputInfor}
-                    placeholder='0389293123'
+                    placeholder='**************'
                     placeholderTextColor="#333333" // change color
-
                 />
             </View>
 
@@ -37,7 +37,7 @@ export default function InforProfile() {
                 </Text>
                 <TextInput
                     style={styles.inputInfor}
-                    placeholder='sonhuynh.08092002@gmail.com'
+                    placeholder={props.email}
                     placeholderTextColor="#333333" // change color
 
                 />

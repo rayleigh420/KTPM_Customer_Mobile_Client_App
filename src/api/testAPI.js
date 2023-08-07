@@ -31,7 +31,7 @@ export const forgotPass = async ({ email }) => {
 };
 
 export const changePass = async ({ email, currentPass, newPass }) => {
-  const result = await axios.post("/auth/forgotPass", {
+  const result = await axios.post("/auth/changePass", {
     email,
     currentPass,
     newPass,
