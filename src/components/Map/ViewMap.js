@@ -17,12 +17,20 @@ export default function ViewMap({ targetAddress }) {
         queryFn: () => getCoordinates(targetAddress)
     })
 
+    console.log("Location: ", location)
+
     const { data: distance } = useQuery({
         queryKey: ["distance", targetAddress],
-        queryFn: () => calculateDistance({
-            origin: location,
-            destination: desCoor
-        }),
+        queryFn: () => {
+            if (location) {
+                return calculateDistance({
+                    origin: location,
+                    destination: desCoor
+                })
+            } else {
+                return () => { }
+            }
+        }
     })
 
     useEffect(() => {
@@ -37,10 +45,10 @@ export default function ViewMap({ targetAddress }) {
                     return;
                 }
 
-                let location = await Location.getCurrentPositionAsync({});
+                let result = await Location.getCurrentPositionAsync({});
                 setLocation({
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
+                    latitude: result.coords.latitude,
+                    longitude: result.coords.longitude,
                 });
             } catch (error) {
                 console.log(error)
@@ -54,7 +62,7 @@ export default function ViewMap({ targetAddress }) {
             className="flex-1"
         >
             {
-                location ?
+                location != null ?
                     (
                         <MapView
                             className="w-full h-full"
@@ -93,7 +101,6 @@ export default function ViewMap({ targetAddress }) {
                         <ActivityIndicator size="large" color="#00B14F" />
                     </View>
             }
-            <Text className="mt-[100px]">{JSON.stringify(targetAddress)}</Text>
         </View>
     )
 }

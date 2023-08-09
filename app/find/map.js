@@ -12,7 +12,7 @@ export default function Map() {
 
     const { place } = useLocalSearchParams()
 
-    console.log("Plaec: ", place)
+    console.log("Place: ", place)
     const navigation = useNavigation()
 
     return (

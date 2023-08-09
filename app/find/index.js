@@ -8,7 +8,7 @@ import SavedPlaces from "../../src/components/Places/SavedPlaces";
 import FrequentlyPlaces from "../../src/components/Places/FrequentlyPlaces";
 
 export default function Location() {
-	const [place, setPlace] = useState();
+	const [place, setPlace] = useState('');
 
 	const changePlace = (e) => {
 		setPlace(e)

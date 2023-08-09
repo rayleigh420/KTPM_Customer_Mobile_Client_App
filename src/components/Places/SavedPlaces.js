@@ -10,6 +10,7 @@ export default function SavedPlaces({ place }) {
 
     const handleNavigate = () => {
         console.log("firsHelloit")
+        console.log(place)
         if (place !== '') {
             router.push(`find/map?place=${place}`)
         }
