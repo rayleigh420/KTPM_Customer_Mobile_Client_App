@@ -14,13 +14,13 @@ export default function ViewMap({ targetAddress }) {
 
     const { data: desCoor, isLoading, isError } = useQuery({
         queryKey: ["find", targetAddress],
-        queryFn: () => getCoordinates(targetAddress)
+        queryFn: () => getCoordinates(targetAddress),
     })
 
-    console.log("Location: ", location)
+    // console.log("Location: ", location)
 
     const { data: distance } = useQuery({
-        queryKey: ["distance", targetAddress],
+        queryKey: ["distance", targetAddress, location, desCoor],
         queryFn: () => {
             if (location) {
                 return calculateDistance({
@@ -28,10 +28,12 @@ export default function ViewMap({ targetAddress }) {
                     destination: desCoor
                 })
             } else {
-                return () => { }
+                return () => { return "0 km" }
             }
         }
     })
+
+    // console.log(distance)
 
     useEffect(() => {
         (async () => {
