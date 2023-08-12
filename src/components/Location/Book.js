@@ -6,6 +6,7 @@ import { getPrice } from "../../api/bookAPI";
 import { TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native";
 import { useState } from "react";
+import classNames from "classnames";
 
 export default function Book({ distance }) {
 	const [type, setType] = useState("bike");
@@ -28,11 +29,10 @@ export default function Book({ distance }) {
 		<View className="flex flex-col bg-white py-[20px] rounded-t-[15px]">
 			<TouchableOpacity
 				onPress={() => handleChose("bike")}
-				className={
-					"flex flex-row justify-between items-center min-w-[350px] px-[25px] py-[20px]" +
-						type ==
-						"bike" && "bg-[#EEFAFA]"
-				}
+				className={classNames(
+					"flex flex-row justify-between items-center min-w-[350px] px-[25px] py-[20px]",
+					{ "bg-[#EEFAFA]": type == "bike" }
+				)}
 			>
 				<View className="flex flex-row items-center">
 					<FontAwesome5 name="motorcycle" size={27} color="#00B14F" />
@@ -51,11 +51,10 @@ export default function Book({ distance }) {
 			</TouchableOpacity>
 			<TouchableOpacity
 				onPress={() => handleChose("car")}
-				className={
-					"flex flex-row justify-between items-center min-w-[350px] px-[25px] py-[20px] " +
-						type ==
-						"car" && "bg-[#EEFAFA]"
-				}
+				className={classNames(
+					"flex flex-row justify-between items-center min-w-[350px] px-[25px] py-[20px]",
+					{ "bg-[#EEFAFA]": type == "car" }
+				)}
 			>
 				<View className="flex flex-row items-center">
 					<FontAwesome name="car" size={27} color="#00B14F" />
