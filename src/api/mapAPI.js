@@ -1,6 +1,13 @@
 import axios from "axios";
 import { EXPO_PUBLIC_MAP_APIKEY } from "@env";
 
+export const autocompletePlace = async (place) => {
+	const result = await axios.get(
+		`https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${place}&key=${EXPO_PUBLIC_MAP_APIKEY}`
+	);
+	return result.data.predictions;
+};
+
 export const getCoordinates = async (targetAddress) => {
 	const result = await axios.get(
 		`https://maps.googleapis.com/maps/api/geocode/json?address=${targetAddress}&key=${EXPO_PUBLIC_MAP_APIKEY}`
