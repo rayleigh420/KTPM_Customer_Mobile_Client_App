@@ -59,7 +59,7 @@ export default function Map() {
 				setDistance={setDistance}
 			/>
 			{!pickBook ? (
-				<PickUp setPickBook={setPickBook} />
+				<PickUp setPickBook={setPickBook} distance={distance} />
 			) : (
 				<Book distance={distance} />
 			)}

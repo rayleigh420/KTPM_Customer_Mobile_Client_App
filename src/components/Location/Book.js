@@ -45,7 +45,7 @@ export default function Book({ distance }) {
 						{new Intl.NumberFormat("vi-VN", {
 							style: "currency",
 							currency: "VND",
-						}).format(prices?.motorbikeCost)}
+						}).format(prices?.motorbikeCost || 0)}
 					</Text>
 				</View>
 			</TouchableOpacity>
@@ -67,7 +67,7 @@ export default function Book({ distance }) {
 						{new Intl.NumberFormat("vi-VN", {
 							style: "currency",
 							currency: "VND",
-						}).format(prices?.carCost)}
+						}).format(prices?.carCost) || 0}
 					</Text>
 				</View>
 			</TouchableOpacity>
