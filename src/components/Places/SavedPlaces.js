@@ -5,12 +5,12 @@ import { Entypo, Feather, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { Link, useRouter } from 'expo-router';
 
 export default function SavedPlaces({ place }) {
-    console.log(place)
+    // console.log(place)
     const router = useRouter();
 
     const handleNavigate = () => {
         console.log("firsHelloit")
-        console.log(place)
+        // console.log(place)
         if (place !== '') {
             router.push(`find/map?place=${place}`)
         }
