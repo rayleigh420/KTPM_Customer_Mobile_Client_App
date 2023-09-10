@@ -7,9 +7,17 @@ import { TouchableOpacity } from "react-native";
 import { TouchableWithoutFeedback } from "react-native";
 import { useState } from "react";
 import classNames from "classnames";
+import { useSocket } from "../../utils/SocketContext";
+import { useRouter } from "expo-router";
+// import { storeData } from "../../utils/asyncStorage";
 
-export default function Book({ distance }) {
+export default function Book({ distance, data }) {
 	const [type, setType] = useState("bike");
+	const { socketRef, connectSocket, disconnectSocket } = useSocket();
+	const navigation = useRouter();
+	const [status, setStatus] = useState(true)
+
+	// console.log("data: ", data);
 
 	const {
 		data: prices,
@@ -24,6 +32,31 @@ export default function Book({ distance }) {
 		console.log(type);
 		setType(type);
 	};
+
+	// const data1 = {
+	// 	...data,
+	// 	"price": "10000",
+	// 	"vehicleType": "motorbike",
+	// 	"paymentMethod": "cash"
+	// }
+
+	// console.log("Data1: ", data1);
+
+	const connect = () => {
+		connectSocket();
+		socketRef.current.emit("createBooking", {
+			...data,
+			"price": "10000",
+			"vehicleType": "motorbike",
+			"paymentMethod": "cash"
+		});
+		//if neu co moi push 
+		navigation.push({
+			pathname: "/progressRide",
+		});
+	}
+
+
 
 	return (
 		<View className="flex flex-col bg-white py-[20px] rounded-t-[15px]">
@@ -76,9 +109,11 @@ export default function Book({ distance }) {
 					<Text className="text-[17px] font-bold">GrabNow</Text>
 				</View>
 				<View className="bg-[#00B14F] px-[30px] py-[20px] rounded-[50px] min-w-[165px] justify-center items-center">
-					<Text className="text-[17px] font-bold text-white">
-						Book
-					</Text>
+					<TouchableOpacity className="text-[17px] font-bold text-white" onPress={connect}>
+						<Text>
+							BOOK
+						</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 		</View>

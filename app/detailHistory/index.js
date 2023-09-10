@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Stack } from 'expo-router';
+
 
 export default function DetailHistory() {
     return (
@@ -8,9 +10,15 @@ export default function DetailHistory() {
             {
                 backgroundColor: "#EEEEEE",
                 opacity: 0.8,
-                height: '100%', 
+                height: '100%',
             }
         }>
+            <Stack.Screen
+                options={{
+                    headerTransparent: true,
+                    title: ''
+                }}
+            />
             <Text style={{
                 textAlign: 'center',
                 paddingVertical: 10,
@@ -29,25 +37,25 @@ export default function DetailHistory() {
                     justifyContent: 'space-between',
                     paddingHorizontal: 20,
                     alignItems: 'center',
-                    marginRight: 10, 
+                    marginRight: 10,
                 }
             }>
-                <Icon name="user" size={33} color="grey"  style= {{
-                    borderWidth: 1, 
-                    borderRadius: 30, 
+                <Icon name="user" size={33} color="grey" style={{
+                    borderWidth: 1,
+                    borderRadius: 30,
                     borderColor: '#61677A',
-                    padding: 5, 
-                    paddingHorizontal: 10, 
-                    backgroundColor: 'white', 
-                    textAlign: 'center', 
-                }}/>
+                    padding: 5,
+                    paddingHorizontal: 10,
+                    backgroundColor: 'white',
+                    textAlign: 'center',
+                }} />
                 <Text style={{
                     marginLeft: 15,
                     fontSize: 15,
                     lineHeight: 20,
-                    marginRight: 10, 
+                    marginRight: 10,
                     color: 'grey',
-                    lineHeight: 25, 
+                    lineHeight: 25,
                 }}>
                     Bạn không thể xếp hạng, gửi tiền tip hoặc xem thông tin tài xế sau 72 giờ.
                 </Text>
@@ -251,27 +259,27 @@ export default function DetailHistory() {
 
             </View>
 
-            <View style= {{
-                 display: 'flex', 
-                 flexDirection: 'row',
-                 justifyContent: 'center',   
-                 opacity: 0.9, 
+            <View style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                opacity: 0.9,
             }}>
-            <TouchableOpacity style={{
-                padding: 10,
-                borderRadius: 5,
-                marginTop: 30, 
-                width: '90%', 
-                borderWidth: 1, 
-                borderColor: '#272829', 
-            }} onPress={() => console.log('Button pressed')}>
-                <Text style={{
-                    color: '#272829',
-                    fontSize: 20,
-                    fontWeight: 700, 
-                    textAlign: 'center',
-                }}>Báo cáo lỗi</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={{
+                    padding: 10,
+                    borderRadius: 5,
+                    marginTop: 30,
+                    width: '90%',
+                    borderWidth: 1,
+                    borderColor: '#272829',
+                }} onPress={() => console.log('Button pressed')}>
+                    <Text style={{
+                        color: '#272829',
+                        fontSize: 20,
+                        fontWeight: 700,
+                        textAlign: 'center',
+                    }}>Báo cáo lỗi</Text>
+                </TouchableOpacity>
 
             </View>
 

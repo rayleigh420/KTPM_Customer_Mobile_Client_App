@@ -18,10 +18,12 @@ import ViewMap from "../../src/components/Map/ViewMap";
 import PickUp from "../../src/components/Location/PickUp";
 import Book from "../../src/components/Location/Book";
 import { Touchable } from "react-native-web";
+import { useEffect } from "react";
 
 export default function Map() {
 	const [pickBook, setPickBook] = useState(false);
 	const [distance, setDistance] = useState(0);
+	const [data, setData] = useState({}); 
 
 	const { place } = useLocalSearchParams();
 
@@ -57,11 +59,13 @@ export default function Map() {
 				className=""
 				targetAddress={place}
 				setDistance={setDistance}
+				setData= {setData}
+				data= {data}
 			/>
 			{!pickBook ? (
 				<PickUp setPickBook={setPickBook} distance={distance} />
 			) : (
-				<Book distance={distance} />
+				<Book distance={distance} data= {data}/>
 			)}
 		</View>
 	);

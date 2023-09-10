@@ -15,7 +15,7 @@ import { calculateDistance, getCoordinates } from "../../api/mapAPI";
 import { useNavigation, useRouter } from "expo-router";
 import { EXPO_PUBLIC_MAP_APIKEY } from "@env";
 
-export default function ViewMap({ targetAddress, setDistance }) {
+export default function ViewMap({ targetAddress, setDistance, setData, data }) {
 	const [location, setLocation] = useState(null);
 	const navigation = useNavigation();
 
@@ -44,10 +44,19 @@ export default function ViewMap({ targetAddress, setDistance }) {
 				};
 			}
 		},
-		onSuccess: (data) => {
-			setDistance(data);
+		onSuccess: (dataDistance) => {
+			setDistance(dataDistance);
+			setData({
+				...data,
+				"destination": {
+					"lat": desCoor.latitude, 
+					"lon": desCoor.longitude, 
+				},
+			})
 		},
 	});
+
+
 
 	// console.log(distance)
 
@@ -68,12 +77,23 @@ export default function ViewMap({ targetAddress, setDistance }) {
 					latitude: result.coords.latitude,
 					longitude: result.coords.longitude,
 				});
+
+				setData({
+					...data,
+					"pickup": {
+						"lat": result.coords.latitude,
+						"lon": result.coords.longitude
+					},
+				})
 			} catch (error) {
 				console.log(error);
 				navigation.goBack();
 			}
 		})();
+		console.log();
 	}, []);
+
+	console.log("ViewMap data: ", data);
 
 	return (
 		<View className="flex-1">

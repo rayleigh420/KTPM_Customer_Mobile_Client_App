@@ -11,7 +11,7 @@ import useDebounce from "../../src/hooks/useDebounce";
 
 export default function Location() {
 	const [place, setPlace] = useState("");
-	const debouncedValue = useDebounce(place, 3000);
+	const debouncedValue = useDebounce(place, 1000);
 
 	const changePlace = (e) => {
 		setPlace(e);
