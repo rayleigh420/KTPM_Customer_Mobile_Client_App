@@ -21,11 +21,11 @@ function typePin() {
     mutationFn: ({ email, password }) => signIn({ email, password }),
     onSuccess: (data) => {
       storeData(data.data, "user");
-      navigation.push("/profile");
+      navigation.push("/");
     },
     onError: (err) => {
-      if (err.response.status == 401) {
-        setError("Password incorrect");
+      if (err.response.status !== 200) {
+        setError(err.response.data.message);
       }
     },
   });
